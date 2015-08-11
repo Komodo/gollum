@@ -40,7 +40,7 @@ module Precious
       end
 
       def editable
-        @editable
+        @editable and @user_authed
       end
 
       def page_exists
@@ -48,7 +48,7 @@ module Precious
       end
 
       def allow_editing
-        @allow_editing
+        @allow_editing and @user_authed
       end
 
       def allow_uploads

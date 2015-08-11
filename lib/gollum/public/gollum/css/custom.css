@@ -1,0 +1,36 @@
+.actions .divider
+{
+    width: 1px;
+    height: 2.2em;
+    margin: 0 0.4em;
+    background: #ddd;
+}
+
+#editor-actions
+{
+    text-align: right;
+    margin-top: -0.5em;
+}
+
+/* @section user */
+#user {
+    width: 100%;
+    max-width: 920px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 2em auto 0;
+}
+#user p {
+    text-align: right;
+    color: #999;
+}
+
+#head
+{
+    margin-top: 2em;
+}
+
+#last-edit
+{
+    text-align: right;
+}
