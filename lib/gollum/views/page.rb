@@ -39,7 +39,11 @@ module Precious
       end
 
       def page_header
-        title
+        if File.basename(title) == "Index"
+          return File.basename(File.dirname(title)).capitalize
+        else
+          return title
+        end
       end
 
       def content

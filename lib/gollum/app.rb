@@ -482,26 +482,16 @@ module Precious
 
     def show_page_or_file(fullpath)
       wiki = wiki_new
+      
 
       name = extract_name(fullpath) || wiki.index_page
       path = extract_path(fullpath) || '/'
-
+      altPath = path == "/" ? name : "#{path}/#{name}"
+      
       if page = wiki.paged(name, path, exact = true)
-        @page          = page
-        @name          = name
-        @content       = page.formatted_data
-        @upload_dest   = find_upload_dest(path)
-
-        # Extensions and layout data
-        @editable      = true
-        @page_exists   = !page.versions.empty?
-        @toc_content   = wiki.universal_toc ? @page.toc_data : nil
-        @mathjax       = wiki.mathjax
-        @h1_title      = wiki.h1_title
-        @bar_side      = wiki.bar_side
-        @allow_uploads = wiki.allow_uploads
-
-        mustache :page
+        _show_page_or_file(page, wiki, fullpath, name, path)
+      elsif page = wiki.paged("Index", altPath, exact = true)
+        _show_page_or_file(page, wiki, fullpath, name, path)
       elsif file = wiki.file(fullpath, wiki.ref, true)
         show_file(file)
       else
@@ -509,6 +499,24 @@ module Precious
         page_path = [path, name].compact.join('/')
         redirect to("/create/#{clean_url(encodeURIComponent(page_path))}")
       end
+    end
+    
+    def _show_page_or_file(page, wiki, fullpath, name, path)
+      @page          = page
+      @name          = name
+      @content       = page.formatted_data
+      @upload_dest   = find_upload_dest(path)
+
+      # Extensions and layout data
+      @editable      = true
+      @page_exists   = !page.versions.empty?
+      @toc_content   = wiki.universal_toc ? @page.toc_data : nil
+      @mathjax       = wiki.mathjax
+      @h1_title      = wiki.h1_title
+      @bar_side      = wiki.bar_side
+      @allow_uploads = wiki.allow_uploads
+
+      mustache :page
     end
 
     def show_file(file)
