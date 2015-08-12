@@ -75,6 +75,12 @@ module Precious
 
         breadcrumbs += "</ul>"
       end
+      
+      def is_home
+        if @page
+          return @page.path == "Home.md"
+        end
+      end
 
     end
   end

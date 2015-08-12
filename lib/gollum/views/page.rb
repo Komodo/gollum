@@ -150,6 +150,10 @@ module Precious
       def metadata
         @page.metadata
       end
+      
+      def is_home
+        @page.path == "Home.md"
+      end
 
       private
 
