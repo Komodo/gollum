@@ -19,7 +19,7 @@ module Precious
         if File.basename(title) == "Index"
           return File.basename(File.dirname(title)).capitalize
         else
-          return title
+          return File.basename(title)
         end
       end
 
