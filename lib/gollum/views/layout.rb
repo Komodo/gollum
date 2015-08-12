@@ -56,6 +56,25 @@ module Precious
       def user_name
         @user.name
       end
+      
+      def breadcrumb
+        return unless @page
+        # Not sure exactly why @path is not available here
+        path       = Pathname.new(@page.path)
+
+        # Always expose a link to the root of the wiki
+        breadcrumbs = %{<ul class="breadcrumbs"><li><a href="#{@base_url}/">Home</a></li>}
+
+        # Then for each directory, add a crumb
+        path.descend do |crumb|
+          title = File.basename(crumb, path.extname)
+          # We reached the end of the trail
+          next if title == "Index"
+          breadcrumbs += %{<li><a href="#{@base_url}/#{crumb}">#{title}</a></li>}
+        end
+
+        breadcrumbs += "</ul>"
+      end
 
     end
   end
