@@ -75,11 +75,12 @@ module Precious
         # Then for each directory, add a crumb
         path.descend do |crumb|
           name = File.basename(crumb, path.extname)
+          next if name.downcase == "index"
+          
           if name == File.basename(path, path.extname)
             name = title()
           end
           # We reached the end of the trail
-          next if name == "Index"
           breadcrumbs += %{<li><a href="#{@base_url}/#{crumb}">#{name}</a></li>}
         end
 
