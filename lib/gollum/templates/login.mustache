@@ -1,0 +1,18 @@
+<div id="wiki-wrapper" class="markdown-body">
+<h2>{{title}}</h2>
+<div id="login" class="login_form"> 
+  <h3>{{subtext}}</h3>  
+  <ul class="actions">
+    {{#providers_active}}
+      <li class="minibutton">
+          <a style="height:auto" href="{{{provider_url}}}">
+            {{#image}}
+              <img src="{{{image}}}" alt="{{image_alt}}" title="{{image_title}}"/>
+            {{/image}}
+            <div style="text-align: center">{{{name}}}</div>
+          </a>
+      </li>
+    {{/providers_active}}
+  </ul>
+</div>
+</div>

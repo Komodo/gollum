@@ -1,39 +1,47 @@
 <div id="wiki-wrapper" class="history">
 <div id="head">
   <h1><strong>{{title}}</strong></h1>
-  <ul class="actions">
-    <li class="minibutton"><a href="{{base_url}}/{{escaped_url_path}}"
-       class="action-view-page">Home</a></li>
-  </ul>
+  <p>&nbsp;</p>
 </div>
 <div id="wiki-history">
 
-  <fieldset>
-  <table>
+  <table class="full-width">
+    <thead>
+        <th>
+            Page
+        </th>
+        <th>
+            Comment
+        </th>
+        <th>
+            Author
+        </th>
+        <th>
+            Date
+        </th>
+    </thead>
     <tbody>
 
       {{#versions}}
       <tr>
+        <td class="page">
+            {{#files}}
+                <a href="{{link}}">{{file}}</a>
+            {{/files}}
+        </td>
+        <td class="commit-name">
+            {{message}}
+        </td>
         <td class="author">
             {{>author_template}}
         </td>
-        <td class="commit-name">
-          <span class="time-elapsed" title="{{date_full}}">{{date}}:</span>&nbsp;
-          {{message}}
-          [{{id7}}]
-          {{#files}}
-          <br>
-          <a href="{{link}}">{{file}}</a>
-          {{/files}}
+        <td class="date">
+            <span class="time-elapsed" title="{{date_full}}">{{date}}</span>
         </td>
       </tr>
       {{/versions}}
 
     </tbody>
   </table>
-  </fieldset>
-</div>
-<div id="footer">
-
 </div>
 </div>

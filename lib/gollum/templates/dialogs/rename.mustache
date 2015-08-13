@@ -1,0 +1,70 @@
+<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+
+<form id="rename_page_form">
+    <h2 id="modalTitle">Rename Page</h2>
+    <div class="row">
+        <div class="large-12 columns">
+            <label>
+                Rename To
+                <input type="text" name="name">
+            </label>
+            <span class="context">
+                Renamed page will be created under <code class="path">/</code> unless an absolute path is given.
+            </span>
+            <p>&nbsp;</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-12 columns text-center">
+            <input type="submit" class="button" value="Submit"/>
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function()
+{
+    var form = $("#rename_page_form");
+    var path = pagePath();
+    var oldName = pageName();
+    form.find("[name]").val(oldName);
+    
+    if( path === undefined && $('#file-browser').length != 0 ){
+        // In the pages view, pageFullPath isn't defined.
+        // The new button will still expect a value however.
+        // So we try to figure one out from window.location
+        path = baseUrl == '' ? window.location.pathname.substr(1)
+                             : window.location.pathname.substr(baseUrl.length + 1);
+        // Remove the page viewer part of the url.
+        path = path.replace(/^pages\/?/,'')
+        // For consistency remove the trailing /
+        path = path.replace(/\/$/,'')
+    }
+    
+    form.find("code.path").text("/"+path);
+    
+    form.submit(function(e)
+    {
+        var value = form.find("[name]").val();
+        var newName = 'Rename Page';
+        if (value)
+            newName = value;
+        var name_encoded = [];
+        var name_parts = abspath(path, newName).join('/').split('/');
+        var newPath = name_parts[0];
+        
+        var msg = '/' + path == newPath ? 'Renamed ' + oldName + ' to ' + newName
+                                        : 'Renamed ' + oldName + ' to ' + name_parts.join('/');
+
+        // Fill in the rename form
+        // This is preferable to AJAX so that we automatically follow the 302 response.
+        var rename_form = $("form[name=rename]");
+        rename_form.children("input[name=rename]").val(name_parts.join('/'));
+        rename_form.children("input[name=message]").val(msg);
+        rename_form.submit();
+        
+        e.preventDefault();
+        return false;
+    })
+});
+</script>

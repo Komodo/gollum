@@ -1,0 +1,62 @@
+<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+
+<form id="new_page_form">
+    <h2 id="modalTitle">New Page</h2>
+    <div class="row">
+        <div class="large-12 columns">
+            <label>
+                Page Name
+                <input type="text" name="name">
+            </label>
+            <span class="context">
+                Page will be created under <code class="path">/</code> unless an absolute path is given.
+            </span>
+            <p>&nbsp;</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-12 columns text-center">
+            <input type="submit" class="button" value="Submit"/>
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function()
+{
+    var form = $("#new_page_form");
+    var path = pagePath();
+    if( path === undefined && $('#file-browser').length != 0 ){
+        // In the pages view, pageFullPath isn't defined.
+        // The new button will still expect a value however.
+        // So we try to figure one out from window.location
+        path = baseUrl == '' ? window.location.pathname.substr(1)
+                             : window.location.pathname.substr(baseUrl.length + 1);
+        // Remove the page viewer part of the url.
+        path = path.replace(/^pages\/?/,'')
+        // For consistency remove the trailing /
+        path = path.replace(/\/$/,'')
+    }
+    
+    form.find("code.path").text("/"+path);
+    
+    form.submit(function(e)
+    {
+        var value = form.find("[name]").val();
+        var name = 'New Page';
+        if (value)
+            name = value;
+        var name_encoded = [];
+        var name_parts = abspath(path, name).join('/').split('/');
+        // Split and encode each component individually.
+        for( var i=0; i < name_parts.length; i++ )
+        {
+            name_encoded.push(encodeURIComponent(name_parts[i]));
+        }
+        window.location = baseUrl + name_encoded.join('/');
+        
+        e.preventDefault();
+        return false;
+    })
+});
+</script>

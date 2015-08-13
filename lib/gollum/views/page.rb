@@ -11,16 +11,18 @@ module Precious
       @@to_xml       = { :save_with => Nokogiri::XML::Node::SaveOptions::DEFAULT_XHTML ^ 1, :indent => 0, :encoding => 'UTF-8' }
 
       def title
-        h1 = @h1_title ? page_header_from_content(@content) : false
-        h1 || @page.url_path_title
+        h1 = page_header_from_content(@content)
+        h1 = h1 || @page.url_path_title
+        
+        if h1
+          return File.basename(h1)
+        end
+        
+        h1
       end
 
       def page_header
-        if File.basename(title) == "Index"
-          return File.basename(File.dirname(title)).capitalize
-        else
-          return File.basename(title)
-        end
+        title()
       end
 
       def content
@@ -46,7 +48,7 @@ module Precious
       end
 
       def editable
-        @editable and @user_authed
+        @editable and @user_authorized
       end
 
       def page_exists
@@ -54,7 +56,7 @@ module Precious
       end
 
       def allow_editing
-        @allow_editing and @user_authed
+        @allow_editing and @user_authorized
       end
 
       def allow_uploads
@@ -166,18 +168,14 @@ module Precious
       # Finds header node inside Nokogiri::HTML document.
       #
       def find_header_node(doc)
-        case @page.format
-          when :asciidoc
-            doc.css("div#gollum-root > h1:first-child")
-          when :org
-            doc.css("div#gollum-root > p.title:first-child")
-          when :pod
-            doc.css("div#gollum-root > a.dummyTopAnchor:first-child + h1")
-          when :rest
-            doc.css("div#gollum-root > div > div > h1:first-child")
-          else
-            doc.css("div#gollum-root > h1:first-child")
-        end
+          header = doc.css("#gollum-root > h1:first-child")
+          if header.empty?
+            header = doc.css("#gollum-root > .toc + h1 > a:not(.anchor)")
+          elsif header.empty?
+            header = doc.css("#gollum-root > .toc + h1")
+          end
+          
+          header
       end
 
       # Extracts title from page if present.

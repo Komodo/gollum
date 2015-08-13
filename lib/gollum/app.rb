@@ -7,9 +7,9 @@ require 'useragent'
 require 'stringex'
 
 require 'gollum'
-require_relative '../../../views/layout'
-require_relative '../../../views/editable'
-require_relative '../../../views/has_page'
+require 'gollum/views/layout'
+require 'gollum/views/editable'
+require 'gollum/views/has_page'
 
 require File.expand_path '../helpers', __FILE__
 
@@ -67,7 +67,7 @@ module Precious
     end
 
     # We want to serve public assets for now
-    set :public_folder, "#{dir}/public/gollum"
+    set :public_folder, "#{dir}/public"
     set :static, true
     set :default_markup, :markdown
 
@@ -93,8 +93,11 @@ module Precious
     end
 
     before do
+      @user_authed = user_authed?
+      @user_authorized = user_authorized?
+      @user = get_user
       settings.wiki_options[:allow_editing] = settings.wiki_options.fetch(:allow_editing, true)
-      @allow_editing = settings.wiki_options[:allow_editing] and @user_authed
+      @allow_editing = settings.wiki_options[:allow_editing] and @user_authorized
       forbid unless @allow_editing || request.request_method == "GET"
       Precious::App.set(:mustache, {:templates => settings.wiki_options[:template_dir]}) if settings.wiki_options[:template_dir]
       @base_url = url('/', false).chomp('/')
@@ -309,7 +312,7 @@ module Precious
     post '/create' do
       name   = params[:page].to_url
       path   = sanitize_empty_params(params[:path]) || ''
-      format = params[:format].intern
+      format = "markdown"
       wiki   = wiki_new
 
       path.gsub!(/^\//, '')

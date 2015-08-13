@@ -5,14 +5,13 @@
   <meta name="MobileOptimized" content="width">
   <meta name="HandheldFriendly" content="true">
   <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" type="text/css" href="{{base_url}}/css/gollum.css" media="all">
-  <link rel="stylesheet" type="text/css" href="{{base_url}}/css/editor.css" media="all">
-  <link rel="stylesheet" type="text/css" href="{{base_url}}/css/dialog.css" media="all">
-  <link rel="stylesheet" type="text/css" href="{{base_url}}/css/template.css" media="all">
-  <link rel="stylesheet" type="text/css" href="{{base_url}}/css/print.css" media="print">
-  <link rel="stylesheet" type="text/css" href="{{base_url}}/css/custom.css" media="all">
-  {{#css}}<link rel="stylesheet" type="text/css" href="{{custom_path}}/custom.css" media="all">{{/css}}
-  {{#noindex}}<meta name="robots" content="noindex, nofollow" />{{/noindex}}
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/github.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  <link rel="stylesheet" type="text/css" href="{{base_url}}/css/inherit/dialog.css" media="all">
+  <link rel="stylesheet" type="text/css" href="{{base_url}}/css/style.css" media="all">
 
   <!--[if IE 7]>
   <link rel="stylesheet" type="text/css" href="{{base_url}}/css/ie7.css" media="all">
@@ -30,10 +29,14 @@
   <script type="text/javascript" src="{{base_url}}/javascript/gollum.js"></script>
   <script type="text/javascript" src="{{base_url}}/javascript/gollum.dialog.js"></script>
   <script type="text/javascript" src="{{base_url}}/javascript/gollum.placeholder.js"></script>
-  <script type="text/javascript" src="{{base_url}}/javascript/editor/gollum.editor.js"></script>
-  {{#use_identicon}}
-  <script type="text/javascript" src="{{base_url}}/javascript/identicon_canvas.js"></script>
-  {{/use_identicon}}
+  <script type="text/javascript" src="{{base_url}}/vendor/foundation/js/vendor/fastclick.js"></script>
+  <script type="text/javascript" src="{{base_url}}/vendor/foundation/js/foundation.min.js"></script>
+  <script>
+  $(function() {
+     $(document).foundation();
+  });
+</script>
+
   {{#mathjax}}
   {{^mathjax_config}}
   <script type="text/javascript">
@@ -61,10 +64,135 @@
   <title>{{title}}</title>
 </head>
 <body>
-    
-{{< user}}
 
-{{{yield}}}
+<nav class="top-bar" data-topbar role="navigation">
+    <div class="row">
+        <ul class="title-area">
+            <li class="name">
+                <h1><a href="#">Komodo IDE</a></h1>
+            </li>
+            <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+        </ul>
+    
+        <section class="top-bar-section">
+            <ul class="right">
+                <li class="has-form">
+                    <form action="{{base_url}}/search" method="get" id="search-form">
+                    <div class="row collapse">
+                        <div class="large-8 small-9 columns">
+                            <input type="text" name="q" id="search-query" placeholder="Search&hellip;" autocomplete="off">
+                        </div>
+                    
+                        <div class="large-4 small-3 columns">
+                            <a href="#" id="search-submit" class="button expand">Search</a>
+                        </div>
+                    </div>
+                    </form>
+                </li>
+                <li class="divider"></li>
+                {{#user_authed}}
+                <li class="has-dropdown not-click">
+                    <a>Logged in as: {{user_name}}</a>
+                    <ul class="dropdown">
+                        <li>
+                            <a href="/__omnigollum__/logout">Logout</a>
+                        </li>
+                    </ul>
+                </li>
+                {{/user_authed}}
+                {{^user_authed}}
+                    <li class="login">
+                        <a href="/__omnigollum__/login">
+                            <i class="fa fa-github-square"></i>
+                            &nbsp;
+                            Login with Github
+                        </a>
+                    </li>
+                {{/user_authed}}
+            </ul>
+    
+            <ul class="left">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                
+                <li>
+                    <a href="/Manual">Manual</a>
+                </li>
+                
+                <li>
+                    <a href="/Troubleshooting">Troubleshooting</a>
+                </li>
+                
+                <li>
+                    <a href="/guides">Guides</a>
+                </li>
+                
+                <li>
+                    <a href="/SDK">SDK</a>
+                </li>
+                
+                {{#user_authorized}}
+                    <li class="divider"></li>
+                
+                    <li>
+                        <a data-reveal-id="new-page-dialog">New Page</a>
+                        <div id="new-page-dialog" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+                            {{>dialogs/new_page}}
+                        </div>
+                    </li>
+                    
+                    {{#allow_uploads}}
+                        <li>
+                            <a data-reveal-id="upload-dialog">Upload File</a>
+                            <div id="upload-dialog" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+                                {{>dialogs/upload}}
+                            </div>
+                        </li>
+                    {{/allow_uploads}}
+                    
+                {{/user_authorized}}
+                
+                {{#user_authed}}{{^user_authorized}}
+                    <li class="divider"></li>
+                    <li>
+                        <a data-reveal-id="contrib-rights-dialog">Request Contribution Rights</a>
+                        <div id="contrib-rights-dialog" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+                            {{>dialogs/contribute}}
+                        </div>
+                    </li>
+                {{/user_authorized}}{{/user_authed}}
+            </ul>
+        </section>
+    </div>
+</nav>
+
+<div class="row">
+    
+    {{#has_sidebar}}
+        <div class="large-12 columns">
+            
+            <aside class="sidebar">
+                {{{sidebar_content}}}
+            </aside>
+            
+            <div class="wrapper with-sidebar">
+    
+    {{/has_sidebar}}
+    {{^has_sidebar}}
+    
+        <div class="wrapper large-12 columns">
+            
+    {{/has_sidebar}}
+    
+    {{^is_home}}
+        {{{breadcrumb}}}
+    {{/is_home}}
+    
+    {{{yield}}}
+
+    </div>
+</div>
 
 </body>
 </html>

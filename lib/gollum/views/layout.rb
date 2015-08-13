@@ -7,13 +7,20 @@ module Precious
       alias_method :h, :escape_html
 
       attr_reader :name, :path
+      
+      def title
+        h1 = page_header_from_content(@content)
+        h1 = h1 || @page.url_path_title
+        
+        if h1
+          return File.basename(h1)
+        end
+        
+        h1
+      end
 
       def escaped_name
         CGI.escape(@name)
-      end
-
-      def title
-        "Home"
       end
 
       def has_path
@@ -45,8 +52,8 @@ module Precious
         @user_authed
       end
       
-      def user_is_admin
-        @user.name == 'Naatan' # Todo: Put in config
+      def user_authorized
+        @user_authorized
       end
       
       def user_provider
@@ -67,10 +74,13 @@ module Precious
 
         # Then for each directory, add a crumb
         path.descend do |crumb|
-          title = File.basename(crumb, path.extname)
+          name = File.basename(crumb, path.extname)
+          if name == File.basename(path, path.extname)
+            name = title()
+          end
           # We reached the end of the trail
-          next if title == "Index"
-          breadcrumbs += %{<li><a href="#{@base_url}/#{crumb}">#{title}</a></li>}
+          next if name == "Index"
+          breadcrumbs += %{<li><a href="#{@base_url}/#{crumb}">#{name}</a></li>}
         end
 
         breadcrumbs += "</ul>"

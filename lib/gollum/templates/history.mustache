@@ -1,29 +1,24 @@
 <div id="wiki-wrapper" class="history">
 <div id="head">
   <h1>History for <strong>{{title}}</strong></h1>
-  <ul class="actions">
-    <li class="minibutton">
-      {{>searchbar}}
-    </li>
-    <li class="minibutton"><a href="{{base_url}}/{{escaped_url_path}}"
-       class="action-view-page">View Page</a></li>
-    {{#allow_editing}}
-      <li class="minibutton"><a href="{{base_url}}/edit/{{escaped_url_path}}"
-         class="action-edit-page">Edit Page</a></li>
-    {{/allow_editing}}
-  </ul>
 </div>
 <div id="wiki-history">
-
-  <ul class="actions">
-    <li class="minibutton"><a href="javascript:void(0);"
-       class="action-compare-revision">Compare Revisions</a></li>
-  </ul>
+  
+    <div class="clearfix">
+        <a class="button tiny action-compare-revision">Compare Revisions</a>
+    </div>
 
   <form name="compare-versions" id="version-form" method="post"
    action="{{base_url}}/compare/{{escaped_url_path}}">
-  <fieldset>
-  <table>
+  <table class="full-width">
+    <thead>
+        <tr>
+            <th width="24"></th>
+            <th>Comment</th>
+            <th>Date</th>
+            <th>Author</th>
+        </tr>
+    </thead>
     <tbody>
 
       {{#versions}}
@@ -31,30 +26,27 @@
         <td class="checkbox">
           <input type="checkbox" name="versions[]" value="{{id}}">
         </td>
+        <td class="commit-name">
+          <a href="{{base_url}}/{{escaped_url_path}}/{{id}}" title="View Version">{{message}}</a>
+        </td>
+        <td class="date">
+            <span class="time-elapsed" title="{{date_full}}">{{date}}</span>
+        </td>
         <td class="author">
             {{>author_template}}
-        </td>
-        <td class="commit-name">
-          <span class="time-elapsed" title="{{date_full}}">{{date}}:</span>&nbsp;
-          {{message}}
-          [<a href="{{base_url}}/{{escaped_url_path}}/{{id}}" title="View commit">{{id7}}</a>]
         </td>
       </tr>
       {{/versions}}
 
     </tbody>
   </table>
-  </fieldset>
+  
+    <div class="clearfix">
+        <a class="button left tiny action-compare-revision">Compare Revisions</a>
+        <a class="button right tiny action-back-to-top">Back to Top</a>
+    </div>
+  
   </form>
 </div>
-<div id="footer">
-  <ul class="actions">
-    <li class="minibutton"><a href="javascript:void(0);"
-       class="action-compare-revision">Compare Revisions</a></li>
 
-    <!-- only show this button if we have more than 20 revisions -->
-    <li class="minibutton"><a href="#"
-       class="action-back-to-top">Back to Top</a></li>
-  </ul>
-</div>
 </div>

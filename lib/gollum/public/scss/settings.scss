@@ -1,0 +1,25 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,300,400italic,700,700italic,500,900);
+
+$topbar-bg: #173545;
+$topbar-link-bg-hover: #2B5468;
+$topbar-link-bg-active: $topbar-link-bg-hover;
+$topbar-dropdown-bg: $topbar-bg;
+$topbar-dropdown-link-bg: $topbar-bg;
+$topbar-dropdown-link-bg-hover: $topbar-link-bg-hover;
+
+$font-family-sans-serif: Roboto, sans-serif;
+$font-family-serif: Georgia, Cambria, "Times New Roman", Times, serif;
+$font-family-monospace: Consolas, "Liberation Mono", Courier, monospace;
+$body-font-color: #333;
+$header-font-color: #333;
+
+$row-width: rem-calc(1600);
+
+$fa-font-path: "/vendor/font-awesome/fonts/";
+
+$button-tny: rem-calc(6);
+$button-sml: rem-calc(8);
+$button-med: rem-calc(10);
+$button-lrg: rem-calc(12);
+
+$anchor-text-decoration-hover: underline;

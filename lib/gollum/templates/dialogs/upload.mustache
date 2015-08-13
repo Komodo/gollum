@@ -1,0 +1,34 @@
+<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+
+<form method="post" enctype="multipart/form-data" action="/uploadFile" id="upload_form" name="upload">
+    <h2 id="modalTitle" class="text-center">Upload File</h2>
+    <div class="row">
+        <div class="small-2 columns">&nbsp;</div>
+        <div class="small-8 columns">
+            <label>
+                Select File
+                <input type="hidden" name="upload_dest" value="">
+                <input type="file" name="file">
+            </label>
+            <span class="context">
+                Your uploaded file will be accessible at <code class="path">/[filename]</code>
+            </span>
+            <p>&nbsp;</p>
+        </div>
+        <div class="small-2 columns">&nbsp;</div>
+    </div>
+    <div class="row">
+        <div class="large-12 columns text-center">
+            <input type="submit" class="button" value="Submit"/>
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function()
+{
+    var form = $("#upload_form");
+    form.find("code.path").text(uploadDest + "/[filename]");
+    form.find("[name=upload_dest]").val(uploadDest);
+});
+</script>

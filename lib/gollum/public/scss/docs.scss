@@ -1,0 +1,334 @@
+@import 'settings';
+
+nav
+{
+    a, a:hover, a:active
+    {
+        text-decoration: none;
+    }
+    
+    .login .fa
+    {
+        font-size: 24px;
+        line-height: 1rem;
+        vertical-align: middle;
+    }
+
+    &.top-bar > .row,
+    {
+        max-width: $row-width;
+        padding: 0 15px;
+    }
+    
+    & > .top-bar-section
+    {
+        max-width: $row-width;
+        margin: -50px auto 0;
+        padding: 0 15px;
+    }
+    
+    .button
+    {
+        line-height: 1rem;
+    }
+    
+}
+
+.reveal-modal
+{
+    max-width: 600px;
+}
+
+aside.sidebar
+{
+    float: left;
+    width: 250px;
+    padding-right: 25px;
+    margin: 25px 50px 25px 25px;
+    border-right: 1px solid #DADFE5;
+    
+    h3
+    {
+        margin-top: 1.15rem;
+    }
+    
+    ul
+    {
+        list-style: none;
+    }
+    
+    & > ul
+    {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.wrapper
+{
+    padding: 25px 25px 25px 25px;
+}
+
+.wrapper.with-sidebar
+{
+    margin-left: 325px;
+}
+
+h1,h2,h3,h4,h5,h6
+{
+    position: relative;
+    font-weight: 300;
+
+    a.anchor
+    {
+        opacity: 0.2;
+        position: absolute;
+    }
+    
+    &:hover a.anchor, a.anchor:hover
+    {
+        opacity: 1;
+    }
+}
+
+h1 a.anchor { font-size: 2rem; left: -2.75rem; top: .75rem; }
+h2 a.anchor { font-size: 2rem; left: -2.3rem; top: .3rem; }
+h3 a.anchor { font-size: 1.5rem; left: -1.7rem; top: .2rem; }
+h4 a.anchor { font-size: 1.2rem; left: -1.4rem; top: .2rem; }
+h5 a.anchor { font-size: 1rem; left: -1.1rem; top: .1rem; }
+h6 a.anchor { font-size: 1rem; left: -1rem; }
+
+.full-width
+{
+    width: 100%;
+}
+
+.space-left
+{
+    margin-left: 15px;
+}
+
+.space-right
+{
+    margin-right: 15px;
+}
+
+.space-left-s
+{
+    margin-left: 5px;
+}
+
+.space-right-s
+{
+    margin-right: 5px;
+}
+
+.space-left-xs
+{
+    margin-left: 2px;
+}
+
+.space-right-xs
+{
+    margin-right: 2px;
+}
+
+/* Page Styling */
+
+#head
+{
+    h1
+    {
+        margin-bottom: 0;
+        
+        & + small
+        {
+            display: block;
+            margin-bottom: 25px;
+        }
+    }
+}
+
+#under-breadcrumb-actions
+{
+    position: absolute;
+    top: 27px;
+    right: 50px;
+    
+    small
+    {
+        font-size: 11px;
+    }
+}
+
+.markdown-body
+{
+    padding: 0;
+    
+    a:not([href])[name], a:not([href])[id]
+    {
+        color: $body-font-color;
+        text-decoration: none;
+        cursor: text;
+    }
+    
+    h1,h2,h3,h4,h5,h6
+    {
+        margin-top: 1.25rem;
+    }
+    
+    table img
+    {
+        /* Max width on images in table cells does weird things to the image */
+        max-width: none;
+    }
+    
+    pre.highlight code
+    {
+        display: block;
+        margin-bottom: 1.25rem;
+    }
+    
+    div.toc
+    {
+        position: relative;
+        z-index: 10;
+        float: right;
+        width: 400px;
+        background: #f4f4f4;
+        border: 1px solid gainsboro;
+        border-radius: 3px;
+        padding: 15px;
+        margin: 0 0 25px 25px;
+        
+        .toc-title
+        {
+            display: none;
+        }
+        
+        ul > ul
+        {
+            margin: 0;
+            padding: 0;
+        }
+        
+        ul
+        {
+            margin-top: 0;
+            margin-bottom: 0;
+            
+            li
+            {
+                font-size: .8em;
+            }
+        }
+    }
+}
+
+/* Edit page */
+
+#gollum-editor
+{
+    border: 0;
+    background: transparent;
+    
+    h4
+    {
+        margin-top: 25px;
+        
+        a.toggler
+        {
+            vertical-align: middle;
+            font-size: 16px;
+        }
+    }
+    
+    .CodeMirror
+    {
+        height: 500px;
+    }
+}
+
+#gollum-editor #gollum-editor-function-bar
+{
+    border-bottom: 0;
+}
+
+#gollum-editor #gollum-editor-function-bar.active #gollum-editor-function-buttons
+{
+    padding-bottom: 0;
+}
+
+#gollum-editor-edit-summary
+{
+    margin-top: 1.25rem;
+}
+
+.collapsed > :not(h4)
+{
+    display: none;
+}
+
+/* Compare page */
+
+#compare-content .data.highlight
+{
+    margin-bottom: 1.25rem;
+    overflow-x: auto;
+    
+    pre
+    {
+        white-space: pre-wrap;       /* css-3 */
+        white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+        white-space: -pre-wrap;      /* Opera 4-6 */
+        white-space: -o-pre-wrap;    /* Opera 7 */
+        word-wrap: break-word;       /* Internet Explorer 5.5+ */
+    }
+    
+    & > table
+    {
+        margin-bottom: 0;
+    }
+}
+
+/* Quickstart */
+
+ul.quickstart
+{
+    list-style: none;
+    text-align: center;
+    
+    &, li
+    {
+        margin: 0;
+        padding: 0;
+    }
+    
+    li
+    {
+        &:not(.clear)
+        {
+            display: inline-block;
+            width: 400px;
+            padding: 60px 100px;
+            text-align: center;
+            margin: 0 auto;
+        }
+        
+        &.clear
+        {
+            display: block;
+            width: 100%;
+        }
+        
+        .fa
+        {
+            font-size: 10em;
+        }
+        
+        a.anchor
+        {
+            display: none;
+        }
+    }
+}
