@@ -63,17 +63,20 @@ module Precious
       options = settings.send(:omnigollum)
       
       return false unless session.has_key? :omniauth_user
+      return true unless authorized_users = options[:authorized_users]
       
-      case (authorized_users = options[:authorized_users])
-      when Regexp
-        user_authorized = (user.email =~ authorized_users)
-      when Array
-        user_authorized = authorized_users.include?(user.email) || authorized_users.include?(user.nickname)
-      else
-        user_authorized = true
+      authorized_users.each do |pattern|
+        case (pattern)
+        when Regexp
+          user_authorized = (user.email =~ pattern)
+        else
+          user_authorized = (user.email == pattern)
+        end
+        
+        return true if user_authorized
       end
       
-      user_authorized
+      return false
     end
 
     def user_auth
