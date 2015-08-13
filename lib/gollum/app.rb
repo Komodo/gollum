@@ -7,9 +7,9 @@ require 'useragent'
 require 'stringex'
 
 require 'gollum'
-require 'gollum/views/layout'
-require 'gollum/views/editable'
-require 'gollum/views/has_page'
+require_relative '../../../views/layout'
+require_relative '../../../views/editable'
+require_relative '../../../views/has_page'
 
 require File.expand_path '../helpers', __FILE__
 
@@ -483,7 +483,6 @@ module Precious
     def show_page_or_file(fullpath)
       wiki = wiki_new
       
-
       name = extract_name(fullpath) || wiki.index_page
       path = extract_path(fullpath) || '/'
       altPath = path == "/" ? name : "#{path}/#{name}"
