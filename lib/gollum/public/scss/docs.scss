@@ -71,7 +71,7 @@ aside.sidebar
 
 .wrapper.with-sidebar
 {
-    margin-left: 325px;
+    margin-left: 300px;
 }
 
 h1,h2,h3,h4,h5,h6
@@ -91,7 +91,7 @@ h1,h2,h3,h4,h5,h6
     }
 }
 
-h1 a.anchor { font-size: 2rem; left: -2.75rem; top: .75rem; }
+h1 a.anchor { font-size: 2rem; left: -2.3rem; top: .75rem; }
 h2 a.anchor { font-size: 2rem; left: -2.3rem; top: .3rem; }
 h3 a.anchor { font-size: 1.5rem; left: -1.7rem; top: .2rem; }
 h4 a.anchor { font-size: 1.2rem; left: -1.4rem; top: .2rem; }
@@ -194,22 +194,16 @@ h6 a.anchor { font-size: 1rem; left: -1rem; }
         position: relative;
         z-index: 10;
         float: right;
-        width: 400px;
+        width: 300px;
         background: #f4f4f4;
         border: 1px solid gainsboro;
         border-radius: 3px;
         padding: 15px;
-        margin: 0 0 25px 25px;
+        margin: 0 0 50px 50px;
         
         .toc-title
         {
             display: none;
-        }
-        
-        ul > ul
-        {
-            margin: 0;
-            padding: 0;
         }
         
         ul

@@ -126,7 +126,7 @@ select {
 
 .row {
   margin: 0 auto;
-  max-width: 100rem;
+  max-width: 87.5rem;
   width: 100%; }
   .row:before, .row:after {
     content: " ";
@@ -4004,7 +4004,7 @@ button:focus {
     .reveal-modal {
       left: 0;
       margin: 0 auto;
-      max-width: 100rem;
+      max-width: 87.5rem;
       right: 0;
       width: 80%; } }
   @media only screen and (min-width: 40.0625em) {
@@ -4020,35 +4020,35 @@ button:focus {
     .reveal-modal.tiny {
       left: 0;
       margin: 0 auto;
-      max-width: 100rem;
+      max-width: 87.5rem;
       right: 0;
       width: 30%; } }
   @media only screen and (min-width: 40.0625em) {
     .reveal-modal.small {
       left: 0;
       margin: 0 auto;
-      max-width: 100rem;
+      max-width: 87.5rem;
       right: 0;
       width: 40%; } }
   @media only screen and (min-width: 40.0625em) {
     .reveal-modal.medium {
       left: 0;
       margin: 0 auto;
-      max-width: 100rem;
+      max-width: 87.5rem;
       right: 0;
       width: 60%; } }
   @media only screen and (min-width: 40.0625em) {
     .reveal-modal.large {
       left: 0;
       margin: 0 auto;
-      max-width: 100rem;
+      max-width: 87.5rem;
       right: 0;
       width: 70%; } }
   @media only screen and (min-width: 40.0625em) {
     .reveal-modal.xlarge {
       left: 0;
       margin: 0 auto;
-      max-width: 100rem;
+      max-width: 87.5rem;
       right: 0;
       width: 95%; } }
   .reveal-modal.full {
@@ -4063,7 +4063,7 @@ button:focus {
       .reveal-modal.full {
         left: 0;
         margin: 0 auto;
-        max-width: 100rem;
+        max-width: 87.5rem;
         right: 0;
         width: 100%; } }
   .reveal-modal.toback {
@@ -4993,7 +4993,7 @@ meta.foundation-mq-topbar {
   .contain-to-grid .top-bar {
     margin: 0 auto;
     margin-bottom: 0;
-    max-width: 100rem; }
+    max-width: 87.5rem; }
   .top-bar-section {
     transition: none 0 0;
     left: 0 !important; }
@@ -8614,11 +8614,11 @@ nav
   vertical-align: middle; }
 
 nav.top-bar > .row {
-  max-width: 100rem;
+  max-width: 87.5rem;
   padding: 0 15px; }
 
 nav > .top-bar-section {
-  max-width: 100rem;
+  max-width: 87.5rem;
   margin: -50px auto 0;
   padding: 0 15px; }
 
@@ -8649,7 +8649,7 @@ ul {
   padding: 25px 25px 25px 25px; }
 
 .wrapper.with-sidebar {
-  margin-left: 325px; }
+  margin-left: 300px; }
 
 h1, h2, h3, h4, h5, h6 {
   position: relative;
@@ -8684,7 +8684,7 @@ a.anchor:hover {
 
 h1 a.anchor {
   font-size: 2rem;
-  left: -2.75rem;
+  left: -2.3rem;
   top: .75rem; }
 
 h2 a.anchor {
@@ -8772,21 +8772,16 @@ div.toc {
     position: relative;
     z-index: 10;
     float: right;
-    width: 400px;
+    width: 300px;
     background: #f4f4f4;
     border: 1px solid gainsboro;
     border-radius: 3px;
     padding: 15px;
-    margin: 0 0 25px 25px; }
+    margin: 0 0 50px 50px; }
     .markdown-body
 div.toc
 .toc-title {
       display: none; }
-    .markdown-body
-div.toc
-ul > ul {
-      margin: 0;
-      padding: 0; }
     .markdown-body
 div.toc
 ul {
