@@ -136,7 +136,7 @@ module Precious
       options = settings.send(:omnigollum)
       auth_config
       require options[:path_views] + '/error_auth'
-      halt mustache Omnigollum::Views::Error
+      halt mustache Omnigollum::Views::Error_auth
     end
 
     def commit_message

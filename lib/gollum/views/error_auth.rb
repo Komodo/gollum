@@ -1,8 +1,8 @@
 module Omnigollum
   module Views
-    class Error < Mustache
+    class Error_auth < Mustache
       self.template_path = File.expand_path("../../templates", __FILE__)
-      self.template_name = 'Error'
+      self.template_name = 'Error_auth'
       
       def title
         @title
