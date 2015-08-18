@@ -9,14 +9,20 @@ module Precious
       attr_reader :name, :path
       
       def title
-        h1 = page_header_from_content(@content)
-        h1 = h1 || @page.url_path_title
+        h1 = false
+        if defined? page_header_from_content
+          h1 = page_header_from_content(@content)
+        end
+        
+        if !h1 and defined? @page
+          h1 = @page.url_path_title
+        end
         
         if h1
           return File.basename(h1)
         end
         
-        h1
+        "Error"
       end
 
       def escaped_name
